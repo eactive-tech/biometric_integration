@@ -148,23 +148,24 @@ app_license = "mit"
 # Scheduled Tasks
 # ---------------
 
-# scheduler_events = {
+scheduler_events = {
 # 	"all": [
 # 		"biometric_integration.tasks.all"
 # 	],
 # 	"daily": [
 # 		"biometric_integration.tasks.daily"
 # 	],
-# 	"hourly": [
-# 		"biometric_integration.tasks.hourly"
-# 	],
+	"hourly": [
+		# "biometric_integration.tasks.hourly",
+		"biometric_integration.biometric_integration.attendance.process_attendance_log"
+	],
 # 	"weekly": [
 # 		"biometric_integration.tasks.weekly"
 # 	],
 # 	"monthly": [
 # 		"biometric_integration.tasks.monthly"
 # 	],
-# }
+}
 
 # Testing
 # -------
@@ -242,3 +243,6 @@ app_license = "mit"
 # 	"Logging DocType Name": 30  # days to retain logs
 # }
 
+fixtures = [
+    {"dt": "Report", "filters": [["module", "=", "Biometric Integration"]]}
+]

@@ -83,7 +83,7 @@ app_license = "mit"
 # ------------
 
 # before_install = "biometric_integration.install.before_install"
-# after_install = "biometric_integration.install.after_install"
+after_install = "biometric_integration.install.after_install"
 
 # Uninstallation
 # ------------
@@ -148,24 +148,33 @@ app_license = "mit"
 # Scheduled Tasks
 # ---------------
 
-scheduler_events = {
+# scheduler_events = {
 # 	"all": [
 # 		"biometric_integration.tasks.all"
 # 	],
 # 	"daily": [
 # 		"biometric_integration.tasks.daily"
 # 	],
-	"hourly": [
-		# "biometric_integration.tasks.hourly",
-		"biometric_integration.biometric_integration.attendance.process_attendance_log"
-	],
+	# "hourly": [
+	# 	# "biometric_integration.tasks.hourly",
+	# 	"biometric_integration.biometric_integration.attendance.process_attendance_log"
+	# ],
 # 	"weekly": [
 # 		"biometric_integration.tasks.weekly"
 # 	],
 # 	"monthly": [
 # 		"biometric_integration.tasks.monthly"
 # 	],
+# }
+
+scheduler_events = {
+    "cron": {
+        "*/5 * * * *": [
+            "biometric_integration.biometric_integration.attendance.process_attendance_log"
+        ]
+	}
 }
+
 
 # Testing
 # -------
@@ -242,7 +251,3 @@ scheduler_events = {
 # default_log_clearing_doctypes = {
 # 	"Logging DocType Name": 30  # days to retain logs
 # }
-
-fixtures = [
-    {"dt": "Report", "filters": [["module", "=", "Biometric Integration"]]}
-]
